@@ -1,6 +1,14 @@
 version: '3.7'
 services:
 
+  # Mongo
+  db:
+    image: mongo
+    ports:
+     - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
 
   # Server
   awesome-nutrition-calculator:
@@ -8,7 +16,11 @@ services:
     build: ./
     volumes:
       - ./:/usr/src/app
+    depends_on:
+      - db
     command: npm start
     working_dir: /usr/src/app
     ports:
       - "3000:3000"
+    environment:
+      DB_URI: mongodb://admin:password@db:27017
