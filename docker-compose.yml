@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+
+
+  # Server
+  awesome-nutrition-calculator:
+    container_name: server
+    build: ./
+    volumes:
+      - ./:/usr/src/app
+    command: npm start
+    working_dir: /usr/src/app
+    ports:
+      - "3000:3000"
