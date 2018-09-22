@@ -1,18 +1,50 @@
 {
-  "name": "awesome-nutrition-calculator-service",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "scripts": {
-    "start": "nodemon server.js"
-  },
-  "author": "Roland Kawka",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.3",
-    "mongoose": "^5.2.17"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.4"
-  }
+    "name": "awesome-nutrition-calculator-service",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.js",
+    "scripts": {
+        "start": "nodemon server.js",
+        "lint": "eslint --ext .js ./"
+    },
+    "eslintConfig": {
+        "extends": "airbnb-base",
+        "env": {
+            "es6": true,
+            "browser": true
+        },
+        "rules": {
+            "brace-style": [
+                "error",
+                "stroustrup"
+            ],
+            "comma-dangle": [
+                "error",
+                "never"
+            ],
+            "no-unused-vars": [
+                "warn"
+            ],
+            "no-var": [
+                "off"
+            ],
+            "one-var": [
+                "off"
+            ]
+        }
+    },
+    "author": "Roland Kawka",
+    "license": "ISC",
+    "dependencies": {
+        "cors": "^2.8.4",
+        "express": "^4.16.3",
+        "mongoose": "^5.2.17",
+        "morgan": "^1.9.1"
+    },
+    "devDependencies": {
+        "eslint": "^5.6.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.14.0",
+        "nodemon": "^1.18.4"
+    }
 }
