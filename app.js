@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 require('./models/Product');
+require('./models/User');
 const seedDb = require('./seeds');
 const schema = require('./schema');
 
