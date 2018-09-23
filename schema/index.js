@@ -8,6 +8,7 @@ const {
     GraphQLID,
     GraphQLInt,
     GraphQLList,
+    GraphQLNonNull,
 } = graphql;
 
 const ProductType = new GraphQLObjectType({
@@ -41,7 +42,33 @@ const RootQuery = new GraphQLObjectType({
     },
 });
 
+const Mutation = new GraphQLObjectType({
+    name: 'Mutation',
+    fields: {
+        addProduct: {
+            type: ProductType,
+            args: {
+                name: { type: new GraphQLNonNull(GraphQLString) },
+                proteins: { type: new GraphQLNonNull(GraphQLInt) },
+                carbs: { type: new GraphQLNonNull(GraphQLInt) },
+                fat: { type: new GraphQLNonNull(GraphQLInt) },
+                calories: { type: new GraphQLNonNull(GraphQLInt) },
+            },
+            resolve(parent, args) {
+                const newProduct = new Product({
+                    name: args.name,
+                    proteins: args.proteins,
+                    carbs: args.carbs,
+                    fat: args.fat,
+                    calories: args.calories,
+                });
+                return newProduct.save();
+            },
+        },
+    },
+});
 
 module.exports = new GraphQLSchema({
     query: RootQuery,
+    mutation: Mutation,
 });
