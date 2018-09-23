@@ -10,6 +10,13 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password
 
+  # Redis
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+
   # Server
   awesome-nutrition-calculator:
     container_name: server
@@ -18,9 +25,11 @@ services:
       - ./:/usr/src/app
     depends_on:
       - db
+      - redis
     command: npm start
     working_dir: /usr/src/app
     ports:
       - "3000:3000"
     environment:
       DB_URI: mongodb://admin:password@db:27017
+      REDIS_URI: redis://redis:6379
