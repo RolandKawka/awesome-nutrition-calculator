@@ -4,7 +4,7 @@ const httpStatus = require('./../utils/http/httpStatusCodes');
 
 const handleRegister = (req, res, bcrypt) => {
     const { email, name, password } = req.body;
-    if (!emailValidator.isEmailValid(email) || !name || !password) {
+    if (!email || !name || !password) {
         return res.status(httpStatus.BAD_REQUEST).json('incorrect form submission');
     }
     const hash = bcrypt.hashSync(password);
@@ -18,7 +18,7 @@ const handleRegister = (req, res, bcrypt) => {
 
     return newUser.save((err, user) => {
         if (err) {
-            res.status(httpStatus.INTERNAL_SERVER_ERROR).json('unable to register');
+            res.status(httpStatus.BAD_REQUEST).json(err);
         }
         res.status(httpStatus.OK).json(user);
     });

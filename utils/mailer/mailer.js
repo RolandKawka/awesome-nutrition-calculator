@@ -13,7 +13,7 @@ function sendEmail(options) {
         html: options.html,
     };
 
-    let response = {};
+    const response = {};
     sgMail
         .send(msg)
         .then(() => {
