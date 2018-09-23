@@ -1,3 +1,4 @@
+const sgMail = require('@sendgrid/mail');
 const httpStatus = require('./../http/httpStatusCodes');
 
 function sendEmail(options) {
