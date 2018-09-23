@@ -11,6 +11,7 @@ const seedDb = require('./seeds');
 const schema = require('./schema');
 
 const register = require('./controllers/register');
+const signin = require('./controllers/signin');
 
 const app = express();
 
@@ -23,6 +24,7 @@ mongoose.connect(process.env.DB_URI);
 
 app.get('/', (req, res) => res.send('Hello World!'));
 app.get('/seedDb', seedDb);
+app.post('/signin', (req, res) => signin.signinAuthentication(req, res, bcrypt));
 app.post('/register', (req, res) => register.handleRegister(req, res, bcrypt));
 
 app.use('/graphql', graphqlHTTP({
