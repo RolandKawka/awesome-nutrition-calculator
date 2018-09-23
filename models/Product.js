@@ -32,7 +32,7 @@ const productSchema = new mongoose.Schema({
         type: Number,
         required: 'You must supply calories!',
         min: 0,
-        max: 100,
+        max: 1000,
     },
 });
 
