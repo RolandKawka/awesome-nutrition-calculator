@@ -33,3 +33,4 @@ services:
     environment:
       DB_URI: mongodb://admin:password@db:27017
       REDIS_URI: redis://redis:6379
+      JWT_SECRET: JWT_SECRET_KEY
