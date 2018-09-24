@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const emailValidator = require('./../utils/validator/emailVaildator');
 const httpStatus = require('./../utils/http/httpStatusCodes');
 
 const handleRegister = (req, res, bcrypt) => {
