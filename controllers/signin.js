@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const redis = require('redis');
+const tokenTypeDictionary = require('./../utils/auth/tokenTypeDictionary');
 const httpStatus = require('./../utils/http/httpStatusCodes');
 
 const redisClient = redis.createClient(process.env.REDIS_URI);
 
+
 const signToken = (email) => {
-    const jwtPayload = { email };
+    const jwtPayload = {
+        email: email,
+        tokenType: tokenTypeDictionary.JWT_SIGN_IN,
+    };
     return jwt.sign(jwtPayload, process.env.JWT_SECRET, { expiresIn: '2 days' });
 };
 
