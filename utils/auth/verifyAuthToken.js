@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-exports.verifyAuthToken = (token, requiredTokenType) => {
+exports.isAuthTokenValid = (token, requiredTokenType) => {
 
     if(!token) {
         return false;
