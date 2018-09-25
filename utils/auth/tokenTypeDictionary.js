@@ -1,6 +1,6 @@
 
-exports.JWT_SIGN_IN = "sign in type";
+exports.JWT_SIGN_IN = "signInType";
 
-exports.JWT_EMAIL_VERIFICATION = "email verification type";
+exports.JWT_EMAIL_VERIFICATION = "emailVerificationType";
 
-exports.JWT_PASSWORD_RESET = "password reset type";
+exports.JWT_PASSWORD_RESET = "passwordResetType";
