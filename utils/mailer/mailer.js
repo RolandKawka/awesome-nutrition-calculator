@@ -1,7 +1,7 @@
 const sgMail = require('@sendgrid/mail');
 const httpStatus = require('./../http/httpStatusCodes');
 
-function sendEmail(options) {
+exports.sendEmail = async (options) => {
     sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
     const msg = {
@@ -13,18 +13,17 @@ function sendEmail(options) {
     };
 
     const response = {};
-    sgMail
+
+    await sgMail
         .send(msg)
         .then(() => {
             response.statusCode = httpStatus.OK;
             response.message = 'Email message has been sent successfully';
         })
         .catch(() => {
-            response.statusCode = httpStatus.INTERNAL_SERVER_ERROR;
+            response.statusCode = httpStatus.BAD_REQUEST;
             response.message = 'Error while sending email message';
         });
 
     return response;
-}
-
-module.exports = sendEmail;
+};
