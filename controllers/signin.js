@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const redis = require('redis');
-const tokenTypeDictionary = require('./../utils/auth/tokenTypeDictionary');
-const httpStatus = require('./../utils/http/httpStatusCodes');
+const tokenTypeDictionary = require('../utils/auth/tokenTypeDictionary');
+const httpStatus = require('../utils/http/httpStatusCodes');
 
 const redisClient = redis.createClient(process.env.REDIS_URI);
 
