@@ -11,10 +11,9 @@ exports.sendEmail = async (options) => {
         text: options.text,
         html: options.html,
     };
-
     const response = {};
 
-    await sgMail
+    sgMail
         .send(msg)
         .then(() => {
             response.statusCode = httpStatus.OK;
@@ -24,6 +23,5 @@ exports.sendEmail = async (options) => {
             response.statusCode = httpStatus.BAD_REQUEST;
             response.message = 'Error while sending email message';
         });
-
     return response;
 };
