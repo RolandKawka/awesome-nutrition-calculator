@@ -7,6 +7,7 @@ require("../models/User");
 const User = mongoose.model('User');
 
 const subject = 'Verify email address - awesome nutrition calculator';
+const verifyEmailApiEndpoint = '/verify?token=';
 
 const handleRegister = (bcrypt) => async (req, res) => {
     const { email, name, password } = req.body;
@@ -47,7 +48,7 @@ const createEmailVerificationLink = (user) => {
         tokenType: tokenTypeDictionary.JWT_EMAIL_VERIFICATION,
     };
     const token = jwt.sign(jwtPayload, process.env.JWT_SECRET, { expiresIn: '24h' });
-    return 'localhost:3000/verifyUser?token=' + token;
+    return 'localhost:3000' + verifyEmailApiEndpoint + token;
 };
 
 const verifyUser = async (req, res, next) => {
