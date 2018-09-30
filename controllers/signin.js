@@ -37,7 +37,7 @@ const createSession = (user) => {
 const handleSignin = async (req, res, bcrypt) => {
     const { email, password } = req.body;
     if (!email || !password) {
-        throw new Error('incorrect form submission');
+    //    throw new Error('incorrect form submission');
     }
     const User = mongoose.model('User');
     const user = await User.findOne({ email });
@@ -61,7 +61,7 @@ const getAuthTokenId = (req, res) => {
     });
 };
 
-const signinAuthentication = async (req, res, bcrypt) => {
+const signinAuthentication = (bcrypt) => async (req, res) => {
     const { authorization } = req.headers;
 
     if (authorization) {

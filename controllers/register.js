@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const httpStatus = require('./../utils/http/httpStatusCodes');
 
-const handleRegister = (req, res, bcrypt) => {
+const handleRegister = (bcrypt) => (req,res) => {
     const { email, name, password } = req.body;
     if (!email || !name || !password) {
         return res.status(httpStatus.BAD_REQUEST).json('incorrect form submission');
