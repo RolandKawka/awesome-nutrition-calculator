@@ -1,13 +1,8 @@
 const mongoose = require('mongoose');
 const httpStatus = require('./../utils/http/httpStatusCodes');
-const mailer = require('../utils/mailer/mailer');
-const tokenTypeDictionary = require('../utils/auth/tokenTypeDictionary');
-const jwt = require('jsonwebtoken');
+const emailVerification = require('../utils/auth/emailVerification');
 require("../models/User");
 const User = mongoose.model('User');
-
-const subject = 'Verify email address - awesome nutrition calculator';
-const verifyEmailApiEndpoint = '/verify?token=';
 
 const handleRegister = (bcrypt) => async (req, res) => {
     const { email, name, password } = req.body;
@@ -25,30 +20,10 @@ const handleRegister = (bcrypt) => async (req, res) => {
     try {
         const user = await newUser.save();
         res.status(httpStatus.OK).json(user);
-        const token = createEmailVerificationLink(user);
-        sendVerificationEmail(user.email, subject, token);
+        emailVerification.sendVerificationEmail(user);
     } catch (err) {
         res.status(httpStatus.BAD_REQUEST).json(err);
     }
-};
-
-const sendVerificationEmail = (recipient, subject, text) => {
-    const options = {
-        recipient: recipient,
-        subject: subject,
-        text: text,
-    };
-
-    return mailer.sendEmail(options);
-};
-
-const createEmailVerificationLink = (user) => {
-    const jwtPayload = {
-        email: user.email,
-        tokenType: tokenTypeDictionary.JWT_EMAIL_VERIFICATION,
-    };
-    const token = jwt.sign(jwtPayload, process.env.JWT_SECRET, { expiresIn: '24h' });
-    return 'localhost:3000' + verifyEmailApiEndpoint + token;
 };
 
 const verifyUser = async (req, res, next) => {

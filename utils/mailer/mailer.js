@@ -23,5 +23,6 @@ exports.sendEmail = async (options) => {
             response.statusCode = httpStatus.BAD_REQUEST;
             response.message = 'Error while sending email message';
         });
+
     return response;
 };
